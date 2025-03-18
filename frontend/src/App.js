@@ -11,6 +11,8 @@ function App() {
   const[subj, setsubj] = useState("")
   const[status,setstatus] = useState(false)
 
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
   function handleNamechange(evt){
     setnamefield(evt.target.value)
   }
@@ -42,7 +44,7 @@ function App() {
 
   function sending() {
     setstatus(true)
-    axios.post("http://localhost:5002/sendemail",{msg:msg, namefield:namefield,mailfrom:mailfrom, subj:subj, emails:emails})
+    axios.post(`${backendUrl}/sendemail`,{msg:msg, namefield:namefield,mailfrom:mailfrom, subj:subj, emails:emails})
     .then(function(data){
       if(data.data === true){
         alert("sent successfully")

@@ -3,10 +3,11 @@ const cors = require("cors")
 const mongoose =require("mongoose")
 const nodemailer = require("nodemailer")
 const data = express()
+const FrontendUrl = process.env.FrontendUrl || "https://bulk-mailsender.vercel.app/";
 data.use(express.json())
 data.use(cors())
 
-mongoose.connect("mongodb+srv://tajunissa:987654321@cluster0.j6qgr.mongodb.net/passkey?retryWrites=true&w=majority&appName=Cluster0").then(function(data){
+mongoose.connect().then(function(data){
     console.log("db is connected")
 }).catch(function(){
     console.log("Db is not connected")
@@ -22,7 +23,7 @@ const credential = mongoose.model("credential", credentialSchema, "bulkmail");
 
 
 
-data.post("/sendemail", function(req, res){
+data.post(`${FrontendUrl}/sendemail`, function(req, res){
    var msg = req.body.msg
    var namefield = req.body.namefield
    var mailfrom = req.body.mailfrom
