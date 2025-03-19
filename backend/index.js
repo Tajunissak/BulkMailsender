@@ -3,7 +3,7 @@ const cors = require("cors")
 const mongoose =require("mongoose")
 const nodemailer = require("nodemailer")
 const data = express()
-const FrontendUrl = process.env.FrontendUrl || "https://bulk-mailsender.vercel.app/";
+const FrontendUrl = process.env.FrontendUrl || "https://bulk-mailsender.vercel.app";
 data.use(express.json())
 data.use(cors())
 
@@ -23,7 +23,7 @@ const credential = mongoose.model("credential", credentialSchema, "bulkmail");
 
 
 
-data.post(`${FrontendUrl}/sendemail`, function(req, res){
+data.post("/sendemail", function(req, res){
    var msg = req.body.msg
    var namefield = req.body.namefield
    var mailfrom = req.body.mailfrom
